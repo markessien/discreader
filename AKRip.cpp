@@ -183,8 +183,8 @@ DWORD CAKRip::DoCDDBQueryThread( LPVOID lpParam )
 		CDDBSetOption( CDDB_OPT_PROXYPORT, "", pThis->m_iProxyPort );
 	}
 
-	CDDBSetOption( CDDB_OPT_USER, "user@carillonbells.com", 0 );
-	CDDBSetOption( CDDB_OPT_AGENT, "CarillonBellsRipper", 0 );
+	CDDBSetOption( CDDB_OPT_USER, "---", 0 );
+	CDDBSetOption( CDDB_OPT_AGENT, "---", 0 );
 	
 	pThis->m_strCDDBStatus = "Contacting CDDB Server...";
 	pThis->m_wndNotify.SendMessage(WM_EVENTFIRE, 0);
@@ -513,8 +513,8 @@ DWORD CAKRip::DoCDDBSitesQueryThread( LPVOID lpParam )
 		CDDBSetOption( CDDB_OPT_PROXYPORT, "", pThis->m_iProxyPort );
 	}
 
-	CDDBSetOption( CDDB_OPT_USER, "cddb@essienrd.com", 0 );
-	CDDBSetOption( CDDB_OPT_AGENT, "EssienRD", 0 );
+	CDDBSetOption( CDDB_OPT_USER, "---", 0 );
+	CDDBSetOption( CDDB_OPT_AGENT, "--", 0 );
 	CDDBSetOption( CDDB_OPT_HTTPPORT, "", 80 );
 	
 	CDDBGetServerList( pThis->m_lps );
