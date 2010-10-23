@@ -1,0 +1,34 @@
+HKCR
+{
+	CDReader.CDReaderObj.1 = s 'CDReaderObj Class'
+	{
+		CLSID = s '{4A790E89-6210-40AB-9635-07EEA6362FEB}'
+	}
+	CDReader.CDReaderObj = s 'CDReaderObj Class'
+	{
+		CLSID = s '{4A790E89-6210-40AB-9635-07EEA6362FEB}'
+		CurVer = s 'CDReader.CDReaderObj.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4A790E89-6210-40AB-9635-07EEA6362FEB} = s 'CDReaderObj Class'
+		{
+			ProgID = s 'CDReader.CDReaderObj.1'
+			VersionIndependentProgID = s 'CDReader.CDReaderObj'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			ForceRemove 'Control'
+			ForceRemove 'Insertable'
+			ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 101'
+			'MiscStatus' = s '0'
+			{
+			    '1' = s '132497'
+			}
+			'TypeLib' = s '{DB9E17F3-5D32-458D-9454-A8A219C34D3C}'
+			'Version' = s '1.0'
+		}
+	}
+}

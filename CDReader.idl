@@ -1,0 +1,77 @@
+// CDReader.idl : IDL source for CDReader.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CDReader.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+#include "olectl.h"
+	
+
+
+
+[
+	uuid(DB9E17F3-5D32-458D-9454-A8A219C34D3C),
+	version(1.0),
+	helpstring("ERD CDReader And Ripper")
+]
+library CDREADERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	
+	[
+		object,
+		uuid(101D6863-4A50-48AE-9756-95CD6B5595E8),
+		dual,
+		helpstring("ICDReaderObj Interface"),
+		pointer_default(unique)
+	]
+	interface ICDReaderObj : IDispatch
+	{
+		[id(1), helpstring("method ListCDDrives")] HRESULT ListCDDrives();
+		[id(2), helpstring("method ListSongsOnCD")] HRESULT ListSongsOnCD([in] long Index);
+		[id(3), helpstring("method GetCDDBNamesOfCD")] HRESULT GetCDDBNamesOfCD([in] long DriveIndex);
+		[id(4), helpstring("method CDDBServerInfo")] HRESULT CDDBServerInfo([in] BSTR Server, [in] BSTR CGI, [in] VARIANT_BOOL UseProxy, [in] BSTR ProxyAddress, [in] long ProxyPort);
+		[id(5), helpstring("method CDDBGetServerList")] HRESULT CDDBGetServerList([in] VARIANT_BOOL OnlyDefault);
+		[id(6), helpstring("method SelectCDDBCDInfoFromMultiple")] HRESULT SelectCDDBCDInfoFromMultiple([in] long Index);
+		[propget, id(7), helpstring("property CurrentlyExtractedTrack")] HRESULT CurrentlyExtractedTrack([out, retval] long *pVal);
+		[propget, id(8), helpstring("property ExtractionProgress")] HRESULT ExtractionProgress([out, retval] double *pVal);
+		[id(9), helpstring("method ExtractTrack")] HRESULT ExtractTrack([in] long CDIndex, [in] long Index, [in] BSTR TargetFilePath);
+		[id(10), helpstring("method AbortExtraction")] HRESULT AbortExtraction();
+		[propget, id(11), helpstring("property ExtractedFileLength")] HRESULT ExtractedFileLength([out, retval] double *pVal);
+	};
+
+	[
+		uuid(9F8045F0-07ED-4DD4-9218-04E66A71B7D0),
+		helpstring("_ICDReaderObjEvents Interface")
+	]
+	dispinterface _ICDReaderObjEvents
+	{
+		properties:
+		methods:
+		[id(1), helpstring("method CDDriveListed")] HRESULT CDDriveListed([in] BSTR Name);
+		[id(2), helpstring("method TrackListed")] HRESULT TrackListed([in] BSTR Name, [in] double Length);
+		[id(3), helpstring("method CDDBQueryStatusUpdate")] HRESULT CDDBQueryStatusUpdate([in] BSTR Status);
+		[id(4), helpstring("method CDDBCDInfoRetrieved")] HRESULT CDDBCDInfoRetrieved([in] BSTR Artist, [in] BSTR Title, [in] long Genre);
+		[id(5), helpstring("method TrackNameUpdate")] HRESULT TrackNameUpdate([in] long Index, [in] BSTR NewName);
+		[id(6), helpstring("method CDInserted")] HRESULT CDInserted([in] BSTR DriveLetter);
+		[id(7), helpstring("method CDRemoved")] HRESULT CDRemoved([in] BSTR DriveLetter);
+		[id(8), helpstring("method CDDBServerListed")] HRESULT CDDBServerListed([in] BSTR Server, [in] BSTR CGI, [in] long Port);
+		[id(9), helpstring("method CDDBMultipleMatches")] HRESULT CDDBMultipleMatches();
+		[id(10), helpstring("method CDDBMultipleMatchItem")] HRESULT CDDBMultipleMatchItem([in] BSTR Name);
+		[id(11), helpstring("method CDDBMultipleMatchNotifyComplete")] HRESULT CDDBMultipleMatchNotifyComplete();
+		[id(12), helpstring("method TrackExtractionComplete")] HRESULT TrackExtractionComplete([in] long Index);
+	};
+
+	[
+		uuid(4A790E89-6210-40AB-9635-07EEA6362FEB),
+		helpstring("CDReaderObj Class")
+	]
+	coclass CDReader
+	{
+		[default] interface ICDReaderObj;
+		[default, source] dispinterface _ICDReaderObjEvents;
+	};
+};
